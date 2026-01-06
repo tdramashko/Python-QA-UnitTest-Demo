@@ -5,3 +5,14 @@ __pycache__/
 venv/
 .venv/
 .vscode/
+
+# Pytest cache
+.pytest_cache/
+
+# Test artifacts
+report.html
+report*.html
+screenshots/
+
+# Playwright traces/reports (if generated)
+playwright-report/
