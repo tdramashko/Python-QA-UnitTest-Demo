@@ -32,23 +32,33 @@ A simple Playwright pytest project demonstrating automated UI testing on [demoqa
 - Form labels and ARIA attributes
 - Keyboard navigation and focus management
 - Color contrast and semantic HTML
-- Accessibility tree validatio # Text box form tests
+- Accessibility tree validation
+- Screen reader compatibility
+
+### Responsive Design (`test_responsive.py`)
+- Mobile viewports (iPhone SE, iPhone 12/13)
+- Tablet viewports (iPad portrait/landscape)
+- Laptop screens (1366x768, 1440x900)
+- Desktop displays (Full HD, 2K)
+- Cross-device form accessibility
+- Layout adaptation and scroll behavior
+
+## Project Structure
+
+```
+Python-demo/
+├── tests/
+│   ├── test_text_box.py       # Text box form tests
 │   ├── test_buttons.py        # Button interaction tests
 │   ├── test_web_tables.py     # Web table CRUD tests
-│   └── test_accessibility.py  # Accessibility & a11y tests
+│   ├── test_accessibility.py  # Accessibility & a11y tests
+│   └── test_responsive.py     # Responsive design tests
 ├── pages/
 │   ├── text_box_page.py       # Text box page object
 │   ├── buttons_page.py        # Buttons page object
 │   ├── web_tables_page.py     # Web tables page object
-│   └── accessibility_page.py  # Accessibility
-├── tests/
-│   ├── test_text_box.py      # Text box form tests
-│   ├── test_buttons.py        # Button interaction tests
-│   └── test_web_tables.py     # Web table CRUD tests
-├── pages/
-│   ├── text_box_page.py       # Text box page object
-│   ├── buttons_page.py        # Buttons page object
-│   └── web_tables_page.py     # Web tables page object
+│   ├── accessibility_page.py  # Accessibility page object
+│   └── responsive_page.py     # Responsive design page object
 ├── conftest.py                # pytest configuration & fixtures
 ├── pytest.ini                 # pytest settings
 └── requirements.txt           # Project dependencies
@@ -92,6 +102,11 @@ pytest --html=report.html --self-contained-html
 ```bash
 pytest --browser firefox
 pytest --browser webkit
+```
+
+**Run responsive tests only:**
+```bash
+pytest tests/test_responsive.py -v
 ```
 
 ## Configuration
