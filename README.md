@@ -43,6 +43,14 @@ A simple Playwright pytest project demonstrating automated UI testing on [demoqa
 - Cross-device form accessibility
 - Layout adaptation and scroll behavior
 
+### Alerts & JavaScript Dialogs (`test_alerts.py`)
+- Simple JavaScript alerts
+- Timed alerts (delayed appearance)
+- Confirm dialogs (OK/Cancel)
+- Prompt dialogs with text input
+- Alert message validation
+- Sequential dialog handling
+
 ## Project Structure
 
 ```
@@ -52,13 +60,15 @@ Python-demo/
 │   ├── test_buttons.py        # Button interaction tests
 │   ├── test_web_tables.py     # Web table CRUD tests
 │   ├── test_accessibility.py  # Accessibility & a11y tests
-│   └── test_responsive.py     # Responsive design tests
+│   ├── test_responsive.py     # Responsive design tests
+│   └── test_alerts.py         # JavaScript alerts & dialogs
 ├── pages/
 │   ├── text_box_page.py       # Text box page object
 │   ├── buttons_page.py        # Buttons page object
 │   ├── web_tables_page.py     # Web tables page object
 │   ├── accessibility_page.py  # Accessibility page object
-│   └── responsive_page.py     # Responsive design page object
+│   ├── responsive_page.py     # Responsive design page object
+│   └── alerts_page.py         # Alerts handling page object
 ├── conftest.py                # pytest configuration & fixtures
 ├── pytest.ini                 # pytest settings
 └── requirements.txt           # Project dependencies
