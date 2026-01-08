@@ -1,11 +1,13 @@
-name: Docker Tests
+name: Docker Build Validation
 
 on:
-  push:
-    branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
   workflow_dispatch:
+  # Only run on main/develop for releases
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
 
 jobs:
   docker-test:

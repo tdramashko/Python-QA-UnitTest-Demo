@@ -1,9 +1,10 @@
 name: Code Quality
 
 on:
-  push:
-    branches: [ main, develop, feature/* ]
   pull_request:
+    branches: [ main, develop ]
+  # Run on push to main/develop only
+  push:
     branches: [ main, develop ]
 
 jobs:

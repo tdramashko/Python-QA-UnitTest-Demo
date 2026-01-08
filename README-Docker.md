@@ -2,6 +2,8 @@
 
 This guide explains how to run the Playwright tests using Docker.
 
+> **Note**: Docker image is optimized for Chromium only. For multi-browser testing, use GitHub Actions or local pytest.
+
 ## Prerequisites
 
 - Docker installed on your system
