@@ -18,7 +18,7 @@ class TextBoxPage:
         
     def navigate(self):
         """Navigate to the text box page."""
-        self.page.goto(self.url)
+        self.page.goto(self.url, wait_until="domcontentloaded")
         
     def fill_form(self, full_name: str, email: str, current_address: str, permanent_address: str):
         """Fill out the text box form."""

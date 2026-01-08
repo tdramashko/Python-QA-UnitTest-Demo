@@ -8,6 +8,8 @@ def page(context: BrowserContext) -> Page:
     page = context.new_page()
     # Set default timeout to 60 seconds for flaky demoqa.com
     page.set_default_timeout(60000)
+    # Set default navigation timeout to 90 seconds
+    page.set_default_navigation_timeout(90000)
     yield page
     page.close()
 

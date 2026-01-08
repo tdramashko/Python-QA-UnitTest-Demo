@@ -20,7 +20,7 @@ class ButtonsPage:
         
     def navigate(self):
         """Navigate to the buttons page."""
-        self.page.goto(self.url)
+        self.page.goto(self.url, wait_until="domcontentloaded")
         
     def double_click(self):
         """Perform double click on the double click button."""

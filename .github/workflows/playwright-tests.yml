@@ -58,7 +58,7 @@ jobs:
             --html=report-${{ matrix.browser }}.html \
             --self-contained-html \
             --base-url=https://demoqa.com
-        timeout-minutes: 20
+        timeout-minutes: 25
         continue-on-error: false
 
       - name: Upload test report

@@ -24,7 +24,7 @@ class AlertsPage:
         
     def navigate(self):
         """Navigate to the alerts page."""
-        self.page.goto(self.url)
+        self.page.goto(self.url, wait_until="domcontentloaded")
         
     def click_simple_alert(self):
         """Click button that triggers simple alert."""
