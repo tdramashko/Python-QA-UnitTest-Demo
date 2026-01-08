@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  playwright-tests:
+    build: .
+    container_name: playwright-test-runner
+    volumes:
+      # Mount volumes to preserve test outputs
+      - ./screenshots:/app/screenshots
+      - ./report.html:/app/report.html
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Override command if needed (tests run in headless mode by default)
+    # command: pytest tests/test_text_box.py --html=report.html
