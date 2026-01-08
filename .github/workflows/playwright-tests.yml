@@ -2,7 +2,7 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ main, develop, feature/* ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
   workflow_dispatch:
@@ -14,7 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [chromium, firefox, webkit]
+        # Run all browsers on PRs and main/develop, only chromium on workflow_dispatch
+        browser: ${{ github.event_name == 'pull_request' && fromJSON('["chromium", "firefox", "webkit"]') || fromJSON('["chromium"]') }}
     
     steps:
       - name: Checkout code

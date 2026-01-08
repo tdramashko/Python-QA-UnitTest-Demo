@@ -28,7 +28,7 @@ jobs:
         run: |
           docker run --rm \
             -v ${{ github.workspace }}/screenshots:/app/screenshots \
-            -v ${{ github.workspace }}/report.html:/app/report.html \
+            -v ${{ github.workspace }}/reports:/app/reports \
             playwright-tests
 
       - name: Upload test report
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: docker-test-report
-          path: report.html
+          path: reports/report.html
           retention-days: 30
 
       - name: Upload screenshots

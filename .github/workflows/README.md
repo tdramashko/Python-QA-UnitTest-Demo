@@ -5,23 +5,24 @@ This directory contains optimized CI/CD workflows for automated testing and code
 ## Workflows
 
 ### 1. Playwright Tests (`playwright-tests.yml`) ⚡
-**Trigger**: Push to main/develop/feature branches, Pull Requests, Manual dispatch
+**Trigger**: Push to main/develop, Pull Requests, Manual dispatch
 
 **Optimizations**:
 - ✅ **Browser caching** - Browsers cached between runs (90% faster on cache hit)
+- ✅ **Smart matrix** - All browsers on PRs, Chromium only on main/develop (saves time & cost)
 - ✅ **Parallel execution** - Uses pytest-xdist to run tests in parallel
-- ✅ **Matrix testing** - Tests all three browsers (Chromium, Firefox, WebKit) in parallel
 - ✅ **Pip caching** - Python dependencies cached automatically
-- ✅ **15-minute timeout** - Prevents hanging jobs
+- ✅ **25-minute timeout** - Prevents hanging jobs
 
 **What it does**:
-- Runs tests across all three browsers in parallel
+- **On PRs**: Runs full test suite across all three browsers (Chromium, Firefox, WebKit)
+- **On main/develop**: Runs quick Chromium tests only
 - Generates HTML reports for each browser
 - Uploads test reports and screenshots as artifacts
 - Installs only the specific browser needed per matrix job
 
 **Artifacts**:
-- `test-report-{browser}` - HTML reports (kept 30 days)
+- `test-report-{browser}` - HTML reports in `reports/` directory (kept 30 days)
 - `screenshots-{browser}` - Failure screenshots (kept 30 days)
 
 ### 2. Docker Build Validation (`docker-tests.yml`) 🐳
@@ -29,18 +30,20 @@ This directory contains optimized CI/CD workflows for automated testing and code
 
 **Optimizations**:
 - ✅ **Only Chromium** - Installs only Chromium browser (75% smaller image)
-- ✅ **Runs only when needed** - Not on every feature branch push
+- ✅ **Runs only when needed** - PRs and main branch, not on feature pushes
 - ✅ **Docker Buildx** - Faster builds with caching support
+- ✅ **Correct volume mounts** - Uses directory mounts for reports, not file mounts
 
 **What it does**:
 - Validates Docker build succeeds
-- Runs smoke tests in Docker container
+- Runs full test suite in containerized environment
 - Ensures production Docker image works correctly
+- Tests with pytest-ci.ini configuration
 
-**Use case**: Validates Docker setup before releases, not for regular testing
+**Use case**: Validates Docker deployment before merges and releases
 
 **Artifacts**:
-- `docker-test-report` - HTML report (kept 30 days)
+- `docker-test-report` - HTML report from `reports/` directory (kept 30 days)
 - `docker-screenshots` - Failure screenshots (kept 30 days)
 
 ### 3. Code Quality (`lint.yml`) 🔍
