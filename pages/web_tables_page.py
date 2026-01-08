@@ -25,7 +25,7 @@ class WebTablesPage:
         
     def navigate(self):
         """Navigate to the web tables page."""
-        self.page.goto(self.url)
+        self.page.goto(self.url, wait_until="domcontentloaded")
         
     def click_add_button(self):
         """Click the add new record button."""

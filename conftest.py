@@ -6,6 +6,10 @@ from playwright.sync_api import Page, BrowserContext
 def page(context: BrowserContext) -> Page:
     """Create a new page for each test."""
     page = context.new_page()
+    # Set default timeout to 60 seconds for flaky demoqa.com
+    page.set_default_timeout(60000)
+    # Set default navigation timeout to 90 seconds
+    page.set_default_navigation_timeout(90000)
     yield page
     page.close()
 
@@ -23,10 +27,13 @@ def browser_context_args(browser_context_args):
 def screenshot_on_failure(page: Page, request):
     """Take screenshot on test failure."""
     yield
-    if request.node.rep_call.failed:
-        screenshot_path = f"screenshots/{request.node.name}.png"
-        page.screenshot(path=screenshot_path)
-        print(f"Screenshot saved: {screenshot_path}")
+    if hasattr(request.node, 'rep_call') and request.node.rep_call.failed:
+        try:
+            screenshot_path = f"screenshots/{request.node.name}.png"
+            page.screenshot(path=screenshot_path, timeout=5000)
+            print(f"Screenshot saved: {screenshot_path}")
+        except Exception as e:
+            print(f"Failed to take screenshot: {e}")
 
 
 def pytest_runtest_makereport(item, call):

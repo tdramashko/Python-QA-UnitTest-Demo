@@ -36,11 +36,11 @@ class ResponsivePage:
         
     def navigate_to_text_box(self):
         """Navigate to text box page."""
-        self.page.goto(self.text_box_url)
-        
+        self.page.goto(self.text_box_url, wait_until="domcontentloaded")
+
     def navigate_to_buttons(self):
         """Navigate to buttons page."""
-        self.page.goto(self.buttons_url)
+        self.page.goto(self.buttons_url, wait_until="domcontentloaded")
         
     def is_element_visible(self, selector: str) -> bool:
         """Check if element is visible in viewport."""

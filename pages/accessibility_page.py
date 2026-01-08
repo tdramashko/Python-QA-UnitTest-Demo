@@ -11,11 +11,11 @@ class AccessibilityPage:
         
     def navigate_to_text_box(self):
         """Navigate to the text box page."""
-        self.page.goto(self.text_box_url)
+        self.page.goto(self.text_box_url, wait_until="domcontentloaded")
         
     def navigate_to_buttons(self):
         """Navigate to the buttons page."""
-        self.page.goto(self.buttons_url)
+        self.page.goto(self.buttons_url, wait_until="domcontentloaded")
         
     def check_aria_labels(self, element_selector: str) -> dict:
         """Check aria attributes for an element."""

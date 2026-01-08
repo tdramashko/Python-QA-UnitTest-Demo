@@ -12,6 +12,7 @@ venv/
 # Test artifacts
 report.html
 report*.html
+reports/
 screenshots/
 
 # Playwright traces/reports (if generated)

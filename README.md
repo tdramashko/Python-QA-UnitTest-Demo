@@ -105,7 +105,7 @@ pytest --headless
 
 **Generate HTML report:**
 ```bash
-pytest --html=report.html --self-contained-html
+pytest --html=reports/report.html --self-contained-html
 ```
 
 **Run with different browser:**

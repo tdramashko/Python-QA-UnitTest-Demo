@@ -1,0 +1,48 @@
+name: Docker Build Validation
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+  # Only run on main/develop for releases
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  docker-test:
+    name: Run Tests in Docker
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t playwright-tests .
+
+      - name: Run tests in Docker
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}/screenshots:/app/screenshots \
+            -v ${{ github.workspace }}/reports:/app/reports \
+            playwright-tests
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-test-report
+          path: reports/report.html
+          retention-days: 30
+
+      - name: Upload screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-screenshots
+          path: screenshots/
+          retention-days: 30
